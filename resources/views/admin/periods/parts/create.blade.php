@@ -18,6 +18,7 @@
                 <div class="col-md-12">
                     <label for="period" class="form-control-label">{{ trans('admin.period_name') }}</label>
                     <select name="period" class="form-control">
+                        <option value="" selected disabled>@lang('admin.select')</option>
                         <option value="ربيعيه" style="text-align: center">{{ trans('admin.autumnal') }}</option>
                         <option value="خريفيه" style="text-align: center">{{ trans('admin.fall') }}</option>
                     </select>
@@ -26,6 +27,7 @@
                 <div class="col-md-12">
                     <label for="period" class="form-control-label">{{ trans('admin.session_name') }}</label>
                     <select name="session" class="form-control">
+                        <option value="" selected disabled>@lang('admin.select')</option>
                         <option value="عاديه" style="text-align: center">{{ trans('admin.normal') }}</option>
                         <option value="استدراكيه" style="text-align: center">{{trans('admin.remedial')}}</option>
                     </select>
@@ -34,21 +36,18 @@
 
                 <div class="col-md-12">
                     <label for="group_name" class="form-control-label">{{ trans('admin.year_start')}} </label>
-                    <select name="year_start" class="form-control" id="year_start">
-                        @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                        @endfor
-                    </select>
+
+                    <input type="number" class="form-control" name="year_start" id="year_start">
+
+
                 </div>
 
 
                 <div class="col-md-12">
                     <label for="group_name" class="form-control-label">{{ trans('admin.year_end')}} </label>
-                    <select name="year_end" class="form-control" id="year_start">
-                        @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                        @endfor
-                    </select>
+
+                    <input type="number" class="form-control" name="year_end" id="year_end">
+
                 </div>
 
             </div>

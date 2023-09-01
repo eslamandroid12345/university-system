@@ -6,11 +6,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="group_id" class="form-control-label">@lang('admin.year')</label>
-                    <select name="year" class="form-control" id="year">
-                        @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                        @endfor
-                    </select>
+
+                    <input type="number" class="form-control" name="year" id="year">
+
                 </div>
             </div>
             <div class="row">
@@ -28,7 +26,7 @@
                 <div class="col-md-6">
                     <label for="department_id" class="form-control-label">@lang('admin.department')</label>
                     <select class="form-control" name="department_id" required>
-                        <option style="text-align: center" value="" selected disabled>@lang('admin.select')</option>
+                        <option style="text-align: center" value="" selected >@lang('admin.select')</option>
                         @foreach ($departments as $department)
                             <option style="text-align: center" value="{{ $department->id }}">
                                 {{ $department->getTranslation('department_name', app()->getLocale()) }}</option>
@@ -58,7 +56,7 @@
 
                 @php
 
-                $days = ["السبت","الاحد","الاثنين","الثلاثاء","الاربعاء","الخميس"];
+                $days = ["الاثنين","الثلاثاء","الاربعاء","الخميس","الجمعة","السبت","الاحد"];
                 @endphp
                 <div class="col-md-6">
                     <label for="title" class="form-control-label">{{ trans('admin.exam_day') }}</label>
@@ -74,6 +72,7 @@
                 <div class="col-md-6">
                     <label for="period" class="form-control-label">{{ trans('admin.period') }}</label>
                     <select name="period" class="form-control">
+                        <option value="" selected disabled>@lang('admin.select')</option>
                         <option value="ربيعيه" style="text-align: center">{{ trans('admin.autumnal') }}</option>
                         <option value="خريفيه" style="text-align: center">{{ trans('admin.fall') }}</option>
                     </select>
@@ -81,6 +80,7 @@
                 <div class="col-md-6">
                       <label for="period" class="form-control-label">{{ trans('admin.session') }}</label>
                     <select name="session" class="form-control">
+                        <option value="" selected disabled>@lang('admin.select')</option>
                         <option value="عاديه" style="text-align: center">{{ trans('admin.normal') }}</option>
                         <option value="استدراكيه" style="text-align: center">{{ trans('admin.remedial') }}</option>
                     </select>
@@ -122,6 +122,7 @@
             success: function(data) {
                 if (data !== 404) {
                     $('select[name="department_branch_id"]').empty();
+                    $('select[name="department_branch_id"]').append('  <option value="" selected >@lang('admin.select')</option>')
                     $.each(data, function(key, value) {
                         $('select[name="department_branch_id"]').append('<option value="' +
                             key + '">' + value + '</option>');

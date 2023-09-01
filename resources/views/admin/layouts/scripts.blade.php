@@ -109,12 +109,11 @@
         }
     });
 
-    var loader = ` <div class="linear-background">
+    var loader = `<div class="linear-background">
                             <div class="inter-crop"></div>
                             <div class="inter-right--top"></div>
                             <div class="inter-right--bottom"></div>
-                        </div>
-        `;
+                        </div>`;
 
 
     @php
@@ -127,11 +126,13 @@
         ->where('register_year','=',$period->year_start)
         ->where('register_year','<',$period->year_end)
         ->first();
+
+        $user = \App\Models\User::where('id',auth()->user()->id)->first();
+
     @endphp
 
-
     @if($reregistration)
-    @if($reregistration->branch_restart_register == 0)
+    @if($reregistration->branch_restart_register == 0 && isset($user->user_department->confirm_request) && $user->user_department->confirm_request != 0)
     $(document).ready(function () {
         if ({{ auth()->user()->user_type == 'student' && $university_settings->reregister_end > \Carbon\Carbon::now() }}) {
             $('#RegisterForm-body').html(loader)
@@ -141,9 +142,23 @@
             }, 250)
         }
     })
-    @endif
-    @endif
 
+    @endif
+    @endif
+    @if(auth()->user()->user_type == 'student')
+
+        @if($user->user_department->confirm_request == 0 )
+        $(document).ready(function () {
+            if ({{ auth()->user()->user_type == 'student' && $university_settings->reregister_the_track_end > \Carbon\Carbon::now() }}) {
+                $('#RegisterTrackForm-body').html(loader)
+                $('#RegisterFormTrack').modal('show')
+                setTimeout(function () {
+                    $('#RegisterTrackForm-body').load('{{ route('reregisterFormTrack') }}')
+                }, 250)
+            }
+        })
+        @endif
+    @endif
 
 
     $(document).ready(function () {

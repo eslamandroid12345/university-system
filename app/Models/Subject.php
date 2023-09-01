@@ -16,7 +16,6 @@ class Subject extends Model
 
     protected $fillable = [
         'subject_name',
-        'group_id',
         'department_id',
         'department_branch_id',
         'code',
@@ -45,6 +44,11 @@ class Subject extends Model
     public function department_branch(): BelongsTo
     {
         return $this->belongsTo(DepartmentBranch::class, 'department_branch_id', 'id');
+    }
+
+    public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(SubjectUnitDoctor::class, 'id', 'subject_id');
     }
 
 

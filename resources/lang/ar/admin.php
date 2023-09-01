@@ -9,6 +9,8 @@ return [
 
     // General
     "home" => "الرئيسية",
+    "reregister_start" => "تاريخ بداية عملية التسجيل",
+    "reregister_end" => "تاريخ انتهاء عملية التسجيل",
     "actions" => "العمليات",
     "search" => "بحث",
     "sure_delete" => "هل انت متأكد من حذف",
@@ -78,7 +80,7 @@ return [
     "phone" => "رقم الهاتف",
     "parts of the site" => "اجزاء الموقع",
     "Ads section" => "قسم الاعلانات",
-    'Those concerned with evidence and diploma' => "المعنيون بالشواهد والدبلوم",
+    'Those concerned with evidence and diploma' => "الطلبه في الوضعيه الغير سليمه",
     'Diploma certificates' => "شواهد الدبلومات",
     'Student documents' => "طلبات الوثائق",
     "exam" => "امتحان",
@@ -96,7 +98,8 @@ return [
     "updated_degree_successfully" => "تم تعديل العلامة بنجاح",
     "the_entered_mark" => "العلامة المدخلة اكبر من علامة الامتحان",
 
-    "re_record_the_track" => 'اعادة تسجيل المسار',
+    "re_record_the_track" => 'عملية اختيار المسار',
+    "confirm_the_track" => 'اعادة تسجيل المسلك',
 
 
 
@@ -111,6 +114,7 @@ return [
     "update" => "تحديث ",
     "close" => "اغلاق ",
     "delete_confirm" => "هل انت متاكد من حذف ",
+    "confirm" => "تأكيد",
 
 
 
@@ -132,10 +136,10 @@ return [
     // Internal Ad
     "ad" => "اعلان",
     "ads" => "اعلانات الموقع",
-    "internal_ads" => "اعلانات داخلية",
     "date" => "تاريخ",
     "time_ads" => "توقيت الاعلان",
     "url_ads" => "رابط الاعلان",
+    "image_ads" => "صورة الاعلان",
 
     // Department
     "departments" => "المسالك",
@@ -341,6 +345,7 @@ return [
 
     //Element
     'element' => 'العنصر البيداغوجي',
+    'element_code' => 'كود العنصر البيداغوجي',
     'elements' => 'العنصر البيداغوجي',
 
     // Process Degrees
@@ -405,7 +410,10 @@ return [
 
     // data modification
     "data_modify" => "طلب تعديل البيانات",
-
+    "back" => "رجوع",
+    "working" => "يتم التحميل",
+    "there_is_an_error" => "هنالك خطأ",
+    'delete_data' => 'حذف بيانات',
     'last_name' => 'الاسم العائلي',
     'first_name' => 'الاسم الشخصي',
     'last_name_latin' => 'الاسم العائلي بالاثينية',
@@ -518,8 +526,8 @@ return [
     "not_pay" => "غير قابع للدفع",
 
 
-    "problem" => "يوجد مشكله",
-    "no_problem" => "لا يوجد مشكله",
+    "problem" => "غير سليمه",
+    "no_problem" => " سليمه",
     "no_notes" => "لا يوجد ملاحظات",
 
     // point statements
@@ -536,7 +544,6 @@ return [
     "year_name_" => "السنه الدراسيه",
     "period_name_" => "الفتره",
 
-    "unit_name_" => "الفصل",
     "doctor_name_" => "الاستاذ",
     "day_name_" => "اليوم",
     "date_" => "التاريخ",
@@ -581,7 +588,13 @@ return [
     "reset_password" => "تغيير كلمه المرور",
 
     "counter" => "احصائيات الاداره في الموقع",
-    "internal_ads" => "الاعلانات الداخلية"
+    "internal_ads" => "الاعلانات الداخلية",
+    "reregister_the_track_start" => "بداية  اعادة تسجيل المسلك",
+    "reregister_the_track_end" => "نهاية  اعادة تسجيل المسلك",
+    "Those_concerned_with_evidence_and_diploma" => " المعنيون بالشواهد والدبلوم",
+    "displayed_successfully" => "تم الاظهار بنجاح",
+    "activation_has_been_deactivated" => "تم الغاء التفعيل",
+    "success" => "نجاح",
 
 
 

@@ -255,7 +255,6 @@ if (!function_exists('processExamCountUser')) {
             ->first();
 
 
-
         $processExamCount = ProcessExam::query()
             ->where('user_id', '=', auth()->id());
 
@@ -359,6 +358,17 @@ if (!function_exists('departmentStudentCount')) {
                 ->count();
         }
     }
+
+    if (!function_exists('processDegreeRequestCount')) {
+        function processDegreeRequestCount(): int
+        {
+
+            return  ProcessDegree::query()
+                ->whereDate('created_at', '=', \Carbon\Carbon::now()->format('Y-m-d'))
+                ->count();
+        }
+    }
+
 
     if (!function_exists('documentCount')) {
         function documentCount(): int

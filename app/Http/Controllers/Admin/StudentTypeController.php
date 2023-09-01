@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Middleware\CheckForbidden;
-use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use App\Models\StudentType;
 use App\Traits\PhotoTrait;
+use App\Models\StudentType;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Middleware\CheckForbidden;
+use App\Http\Requests\StudentTypeStoreRequest;
+use App\Http\Requests\StudentTypeUpdateRequest;
 
 class StudentTypeController extends Controller
 {
@@ -30,11 +32,12 @@ class StudentTypeController extends Controller
                 ->addColumn('action', function ($types) {
                     return '
                             <button type="button" data-id="' . $types->id . '" class="btn btn-pill btn-info-light editBtn"><i class="fa fa-edit"></i></button>
-                            <button class="btn btn-pill btn-danger-light" data-toggle="modal" data-target="#delete_modal"
+                       ';
+
+                    $delete = '<button class="btn btn-pill btn-danger-light" data-toggle="modal" data-target="#delete_modal"
                                     data-id="' . $types->id . '" data-title="' . $types->student_type . '">
                                     <i class="fas fa-trash"></i>
-                            </button>
-                       ';
+                            </button>';
                 })
                 ->editColumn('student_type', function ($types) {
                     return $types->student_type;
@@ -60,7 +63,7 @@ class StudentTypeController extends Controller
     } // end  of create
 
 
-    public function store(Request $request)
+    public function store(StudentTypeStoreRequest $request)
     {
         $inputs = $request->all();
         if (StudentType::create($inputs)) {
@@ -77,7 +80,7 @@ class StudentTypeController extends Controller
     } // end  of edit
 
 
-    public function update(Request $request, $id)
+    public function update(StudentTypeUpdateRequest $request, $id)
     {
         $type = StudentType::findOrFail($id);
         $data = $request->except('_token', '_method');

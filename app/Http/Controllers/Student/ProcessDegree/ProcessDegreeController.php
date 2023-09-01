@@ -11,6 +11,7 @@ use App\Models\ProcessDegree;
 use App\Models\ProcessExam;
 use App\Models\Subject;
 use App\Models\SubjectExamStudent;
+use App\Models\SubjectExamStudentResult;
 use App\Models\SubjectUnitDoctor;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -61,7 +62,8 @@ class ProcessDegreeController extends Controller
                     } else {
 
                         return '
-                            <button disabled class="btn btn-pill btn-danger-light" data-toggle="modal">
+                            <button disabled class="btn btn-pill btn-danger-light"
+                            data-id="' . $process_degrees->id . '" data-title="' . $process_degrees->subject_name . '" data-target="#delete_modal">
                                     <i class="fas fa-trash"></i>
                             </button>
                        ';
@@ -70,6 +72,12 @@ class ProcessDegreeController extends Controller
                 })
                 ->addColumn('identifier_id', function ($process_degrees) {
                     return $process_degrees->user->identifier_id;
+                })
+                ->addColumn('student_name', function ($process_degrees) {
+                    return $process_degrees->user->first_name." ".$process_degrees->user->last_name;
+                })
+                ->addColumn('doctor_name', function ($process_degrees) {
+                    return @$process_degrees->doctor->first_name." ".@$process_degrees->doctor->last_name;
                 })
                 ->addColumn('request_date', function ($process_degrees) {
                     return $process_degrees->created_at->format('Y-m-d');
@@ -126,8 +134,14 @@ class ProcessDegreeController extends Controller
             ->where('subject_id','=',$subject->id)
             ->where('user_id','=',Auth::id())
             ->first();
+        $subjectExamStudentResult = SubjectExamStudentResult::query()
+            ->where('year','=',$period->year_start)
+            ->where('period','عاديه')
+            ->where('subject_id','=',$subject->id)
+            ->where('user_id','=',Auth::id())
+            ->first();
 
-        return view('student.process_degree.normal.create',compact('period','subject','doctor_id','subjectExamStudent'));
+        return view('student.process_degree.normal.create',compact('subjectExamStudentResult','period','subject','doctor_id','subjectExamStudent'));
     }
 
 
@@ -156,7 +170,7 @@ class ProcessDegreeController extends Controller
             ->where('id','=',$id)
             ->first();
 
-        $doctor_id = SubjectUnitDoctor::query()
+        $doctor_id = @SubjectUnitDoctor::query()
             ->where('subject_id','=',$subject->id)
             ->where('year', '=',$period->year_start)
             ->first()->id;
@@ -167,8 +181,14 @@ class ProcessDegreeController extends Controller
             ->where('subject_id','=',$subject->id)
             ->where('user_id','=',Auth::id())
             ->first();
+        $subjectExamStudentResult = SubjectExamStudentResult::query()
+            ->where('year','=',$period->year_start)
+            ->where('period','استدراكيه')
+            ->where('subject_id','=',$subject->id)
+            ->where('user_id','=',Auth::id())
+            ->first();
 
-        return view('student.process_degree.remedial.create',compact('period','subject','doctor_id','subjectExamStudent'));
+        return view('student.process_degree.remedial.create',compact('subjectExamStudentResult','period','subject','doctor_id','subjectExamStudent'));
 
     }
 
@@ -185,4 +205,11 @@ class ProcessDegreeController extends Controller
 
     }
 
+
+    public function destroy(Request $request)
+    {
+        $subjects = ProcessDegree::where('id', $request->id)->firstOrFail();
+        $subjects->delete();
+        return response(['message' => 'تم الحذف بنجاح', 'status' => 200], 200);
+    }
 }

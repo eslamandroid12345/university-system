@@ -13,20 +13,26 @@ class SubjectUnitDoctor extends Model
     protected $fillable = [
         'year',
         'user_id',
+        'group_id',
         'subject_id',
         'period',
     ];
 
     public function doctor(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')
-            ->where('user_type', 'doctor');
+        return $this->belongsTo(User::class, 'user_id', 'id')->where('user_type', 'doctor');
     }
 
 
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class, 'subject_id', 'id');
+    }
+
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
 

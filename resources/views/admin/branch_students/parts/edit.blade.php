@@ -9,7 +9,7 @@
                 <div class="col-md-6">
                     <label for="department_id" class="form-control-label">@lang('admin.department')</label>
                     <select class="form-control" name="department_id">
-                        <option value="" selected disabled>@lang('admin.select')</option>
+                        <option value="" selected >@lang('admin.select')</option>
                         @foreach($departments as $department)
                             <option value="{{ $department->id}}">{{ $department->getTranslation('department_name', app()->getLocale()) }}</option>
                         @endforeach
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="register_year" class="form-control-label">@lang('admin.register_year')</label>
-                    <input type="text" class="form-control" value="{{ $userBranch->register_year }}" name="register_year" required>
+                    <input type="text" class="form-control" value="{{ $userBranch->register_year }}" name="register_year">
                 </div>
             </div>
         </div>

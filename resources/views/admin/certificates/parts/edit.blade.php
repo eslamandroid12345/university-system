@@ -39,8 +39,8 @@
                     <label for="user_id" class="form-control-label">{{trans('admin.situation_with_treasury')}}</label>
                     <select class="form-control" name="situation_with_treasury" id="situation_with_treasury">
                         <option value="" selected disabled>@lang('admin.select')</option>
-                        <option value="1">{{trans('admin.pay')}}</option>
-                        <option value="0">{{trans('admin.not_pay')}}</option>
+                        <option value="1">{{trans('admin.no_problem')}}</option>
+                        <option value="0">{{trans('admin.problem')}}</option>
                     </select>
                 </div>
 
@@ -67,21 +67,23 @@
                 <div class="col-md-12 mt-3">
                     <label for="category_name" class="form-control-label">{{trans('admin.validation_year')}}</label>
 
-                    <select name="validation_year" class="form-control" id="validation_year">
+                    {{-- <select name="validation_year" class="form-control" id="validation_year">
                         @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endfor
-                    </select>
+                    </select> --}}
+                    <input type="number" name="validation_year" class="form-control">
                 </div>
 
 
                 <div class="col-md-12 mt-3">
                     <label for="category_name" class="form-control-label">{{trans('admin.diploma_year')}}</label>
-                    <select name="year" class="form-control" id="year">
+                    {{-- <select name="year" class="form-control" id="year">
                         @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
                             <option value="{{ $year }}">{{ $year }}</option>
                         @endfor
-                    </select>
+                    </select> --}}
+                    <input type="number" name="year" class="form-control">
                 </div>
             </div>
         </div>

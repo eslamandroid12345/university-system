@@ -107,7 +107,7 @@
 
                 <div class="form-group">
                     <label for="email" class="form-control-label">{{trans('student.national_number')}}</label>
-                    <input type="number" class="form-control" name="national_number" id="national_number" value="{{$user->national_number}}">
+                    <input type="text" class="form-control" name="national_number" id="national_number" value="{{$user->national_number}}">
                 </div>
 
             </div>
@@ -117,7 +117,7 @@
 
                 <div class="form-group">
                     <label for="email" class="form-control-label">{{trans('student.national_id')}}</label>
-                    <input type="number" class="form-control" name="national_id" id="national_id" value="{{$user->national_id}}">
+                    <input type="text" class="form-control" name="national_id" id="national_id" value="{{$user->national_id}}">
                 </div>
 
             </div>
@@ -128,6 +128,7 @@
 
                 <div class="form-group">
                     <select name="nationality" class="form-control select2 mt-6" data-placeholder="Choose nationality">
+                        <option value="">{{ trans('admin.select') }}</option>
                         <option value="">{{trans('student.choose')}}</option>
                         <option value="afghan">Afghan</option>
                         <option value="albanian">Albanian</option>
@@ -422,11 +423,9 @@
             <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label for="email" class="form-control-label">{{trans('admin.university_register_year')}}</label>
-                    <select name="university_register_year" class="form-control" id="university_register_year">
-                        @for($year = 2023; $year < \Carbon\Carbon::now()->year +50 ; $year++)
-                            <option value="{{ $year }}">{{ $year }}</option>
-                        @endfor
-                    </select>
+
+                    <input type="number" value="{{$user->university_register_year}}" min="1900"  class="form-control" name="university_register_year" id="university_register_year">
+
                 </div>
 
             </div>
