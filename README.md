@@ -1,64 +1,19 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Screen Shoots
 
-## About Laravel
+![Home](https://github.com/eslamandroid12345/university-system/assets/96002614/eebbcea8-a01d-4c2d-b83c-552484ff4521)
+![Footer](https://github.com/eslamandroid12345/university-system/assets/96002614/89e761f1-c380-44ef-a8a6-bf7cc81d9b3b)
+![Login](https://github.com/eslamandroid12345/university-system/assets/96002614/cade599d-8d2c-4515-8cff-0879142e8b04)
+![Admin](https://github.com/eslamandroid12345/university-system/assets/96002614/e6e0686d-564e-4dd4-b1f8-248a241b9790)
+![Students](https://github.com/eslamandroid12345/university-system/assets/96002614/0f11b2ce-f829-4e91-b346-149baf3aa3a3)
+![Student-data](https://github.com/eslamandroid12345/university-system/assets/96002614/7fed6d0f-2c48-4b2d-bf5b-9844cd7f03b2)
+![Student-documents](https://github.com/eslamandroid12345/university-system/assets/96002614/554337e3-39c8-481b-a6e9-fe998172b4a8)
+![Site-department](https://github.com/eslamandroid12345/university-system/assets/96002614/065a28d4-bc5d-4257-b201-776b372503c9)
+![Documents](https://github.com/eslamandroid12345/university-system/assets/96002614/22ab23e5-471d-4b7e-8efc-abab20b4409c)
+![Dashboard-student](https://github.com/eslamandroid12345/university-system/assets/96002614/fda5bd33-c0bc-4987-beb2-83a42618c4ee)
+![Advertisment](https://github.com/eslamandroid12345/university-system/assets/96002614/241973e9-afbd-41f2-ac09-09fcb79c647e)
+![Setting-part-1](https://github.com/eslamandroid12345/university-system/assets/96002614/3c9f8691-8a5b-4987-ae44-5213d9170ebe)
+![Setting-part-2](https://github.com/eslamandroid12345/university-system/assets/96002614/c71cfe01-13d4-4101-b344-b158f4068131)
+![Schedules](https://github.com/eslamandroid12345/university-system/assets/96002614/899ffd5e-930b-4fdf-97d2-b415be4ba78c)
+![Exam-results](https://github.com/eslamandroid12345/university-system/assets/96002614/df59c13a-30dc-4e74-83db-8a4c3fb93fdb)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
