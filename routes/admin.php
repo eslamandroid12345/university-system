@@ -154,8 +154,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale() . '/dashboard', 'midd
     Route::resource('internal_ads', InternalAdController::class);
     Route::post('active_status', [InternalAdController::class, 'makeActive'])->name('makeActive');
     Route::get('internal_ad/student/{id}', [InternalAdController::class, 'editInternalStudent'])->name('internal_ads_show');
-    Route::get('internal_ad/doctor/index', [InternalAdController::class, 'indexDoctor'])->name('indexDoctor');
-    Route::get('internal_ad/doctor/details/{id}', [InternalAdController::class, 'detailsDoctor'])->name('detailsDoctor');
+    Route::get('internal_ad/Adindex', [InternalAdController::class, 'indexDoctor'])->name('indexDoctor');
+    Route::get('internal_ad/Ad/details/{id}', [InternalAdController::class, 'detailsDoctor'])->name('detailsDoctor');
     Route::get('internal_ad_student', [InternalAdController::class, 'internalAdsStudent'])->name('internal_ads.show');
 
 
@@ -335,6 +335,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale() . '/dashboard', 'midd
     Route::post('reregisterTrack', [ReRecordTheTrackController::class, 'reregisterTrack'])->name('reregisterTrack');
     Route::get('processDegreeDetails/{id}', [SubjectExamController::class, 'processDegreeDetails'])->name('processDegreeDetails');
     Route::post('changeRequestStatus', [SubjectExamController::class, 'changeRequestStatus'])->name('changeRequestStatus');
+
+    #### get user by doctor and subject
+    Route::get('user_related_doctor', [SubjectExamStudentResultController::class, 'getUserBySelectSubject'])->name('getUserBySelectSubject');
 });
 
 

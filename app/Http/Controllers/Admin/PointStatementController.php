@@ -36,13 +36,20 @@ class PointStatementController extends Controller
                 ->editColumn('user_id',function ($points){
                     return $points->user->first_name . ' ' . $points->user->last_name;
                 })
+                ->addColumn('element_name',function ($points){
+                    return $points->element->name_ar;
+                })
+                ->addColumn('element_code',function ($points){
+                    return $points->element->element_code;
+                })
                 ->editColumn('identifier_id',function ($points){
                     return $points->user->identifier_id;
                 })
-               ->addColumn('element_name',function ($points){
-                   $element = Element::where(['element_code'=>$points->element_code])->first();
-                    return @$element->name_ar;
+
+                ->editColumn('element_name',function ($points){
+                    return lang() == 'ar' ? $points->element->name_ar : $points->element->name_latin;
                 })
+
                 ->escapeColumns([])
                 ->make(true);
         } else {

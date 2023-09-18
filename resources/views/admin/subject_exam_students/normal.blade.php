@@ -54,12 +54,20 @@
                             <tr class="fw-bolder text-muted bg-light">
                                 <th class="min-w-25px">{{trans('subject_exam.id')}}</th>
                                 <th class="min-w-50px">{{trans('subject_exam.identifier_id')}}</th>
+                                <th class="min-w-25px">{{trans('point_statement.user')}}</th>
+
                                 <th class="min-w-25px">{{ trans('subject_exam.subject_code') }}</th>
+                                <th class="min-w-25px">{{ trans('subject_exam_student_result.subject') }}</th>
+
                                 <th class="min-w-25px">{{ trans('subject_exam.group') }}</th>
                                 <th class="min-w-50px">{{ trans('subject_exam.university_year') }}</th>
                                 <th class="min-w-50px">{{ trans('subject_exam.exam_code') }}</th>
                                 <th class="min-w-50px">{{ trans('subject_exam.section') }}</th>
                                 <th class="min-w-50px">{{ trans('subject_exam.session') }}</th>
+                                <th class="min-w-25px">{{trans('subject_student_data.exam_day')}}</th>
+                                <th class="min-w-25px">{{trans('subject_student_data.exam_date')}}</th>
+                                <th class="min-w-25px">{{trans('subject_student_data.time_start')}}</th>
+                                <th class="min-w-25px">{{trans('subject_student_data.time_end')}}</th>
                                 <th class="min-w-50px rounded-end">{{ trans('admin.actions') }}</th>
                             </tr>
                             </thead>
@@ -165,12 +173,18 @@
                 var columns = [
                     {data: 'id', name: 'id'},
                     {data: 'identifier_id', name: 'identifier_id'},
+                    {data: 'user_id', name: 'user_id'},
                     {data: 'code', name: 'code'},
+                    {data: 'subject', name: 'subject'},
                     {data: 'group', name: 'group'},
                     {data: 'year', name: 'year'},
                     {data: 'exam_code', name: 'exam_code'},
                     {data: 'section', name: 'section'},
                     {data: 'session', name: 'session'},
+                    {data: 'exam_day', name: 'exam_day'},
+                    {data: 'exam_date', name: 'exam_date'},
+                    {data: 'time_start', name: 'time_start'},
+                    {data: 'time_end', name: 'time_end'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
                 showData('{{route('subject_exam_students.index')}}', columns);

@@ -30,9 +30,9 @@
 
 
                             <tr class="fw-bolder text-muted bg-light">
-                                <th class="min-w-25px">{{trans('subject_student_data.id')}}</th>
+                                {{-- <th class="min-w-25px">{{trans('subject_student_data.id')}}</th> --}}
                                 <th class="min-w-25px">{{trans('subject_student_data.identifier_id')}}</th>
-                                <th class="min-w-25px">{{trans('subject_student_data.subject_code')}}</th>
+                                <th class="min-w-25px">{{trans('admin.subject_name_')}}</th>
                                 <th class="min-w-25px">{{trans('subject_student_data.group_id')}}</th>
                                 <th class="min-w-25px">{{trans('subject_student_data.exam_day')}}</th>
                                 <th class="min-w-25px">{{trans('subject_student_data.exam_date')}}</th>
@@ -59,10 +59,10 @@
             <script>
 
                 var columns = [
-                    {data: 'id', name: 'id'},
+                    // {data: 'id', name: 'id'},
                     {data: 'identifier_id', name: 'identifier_id'},
                     {data: 'code', name: 'code'},
-                    {data: 'group', name: 'group'},
+                    {data: 'group_id', name: 'group_id'},
                     {data: 'exam_day', name: 'exam_day'},
                     {data: 'exam_date', name: 'exam_date'},
                     {data: 'time_start', name: 'time_start'},

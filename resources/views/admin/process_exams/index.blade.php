@@ -35,6 +35,7 @@
 
                                     <th class="min-w-50px">{{ trans('process_exams.id') }}</th>
                                     <th class="min-w-50px">{{ trans('process_exams.identifier_id') }}</th>
+                                    <th class="min-w-25px">{{trans('point_statement.user')}}</th>
                                     <th class="min-w-50px">{{ trans('process_exams.attachment_file') }}</th>
                                     <th class="min-w-50px">{{ trans('process_exams.period') }}</th>
                                     <th class="min-w-50px">{{ trans('process_exams.university_year') }}</th>
@@ -145,6 +146,10 @@
                 name: 'identifier_id'
             },
             {
+                data: 'user_id',
+                name: 'user_id'
+            },
+            {
                 data: 'attachment_file',
                 name: 'attachment_file'
             },
@@ -200,12 +205,16 @@
                 success: function(data) {
                     if (data.code == 200) {
                         if (data.status == 'new') {
+                            $('#dataTable').DataTable().ajax.reload();
                             toastr.success('{{ trans('admin.request_status_is_new') }}');
                         } else if (data.status == 'accept') {
+                            $('#dataTable').DataTable().ajax.reload();
                             toastr.success('{{ trans('admin.request_status_is_accepted') }}');
                         } else if (data.status == 'refused') {
+                            $('#dataTable').DataTable().ajax.reload();
                             toastr.success('{{ trans('admin.request_status_is_refused') }}');
                         } else if (data.status == 'under_processing') {
+                            $('#dataTable').DataTable().ajax.reload();
                             toastr.success('{{ trans('admin.request_status_is_under_processing') }}');
                         }
                     }

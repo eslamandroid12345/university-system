@@ -53,9 +53,7 @@ class InternalAdController extends Controller
                 })
                 ->editColumn('url_ads', function ($internal_ads) {
                     if ($internal_ads->url_ads != null) {
-                        return '<a href="' . asset($internal_ads->url_ads) . '" download>
-                                    <img alt="image" class="avatar avatar-md rounded-circle" src="' . asset($internal_ads->url_ads) . '">
-                                </a>';
+                        return '<a href="' . asset($internal_ads->url_ads) . '" download><button class="btn btn-primary">'.trans('admin.download').'</button></a>';
                     } else {
                         return '<a href="' . asset("uploads/users/default/avatar2.jfif") . '" download>
                                     <img alt="image" class="avatar avatar-md rounded-circle" src="' . asset("uploads/users/default/avatar2.jfif") . '">
@@ -114,7 +112,7 @@ class InternalAdController extends Controller
 
     if ($request->hasFile('url_ads')) {
         $file = $request->file('url_ads');
-        $inputs['url_ads'] = $this->saveImage($file, 'uploads/internal_ads', 'photo');
+        $inputs['url_ads'] = $this->saveImage($file, 'uploads/internal_ads', 'pdf');
     }
     // dd($inputs);
     if (InternalAd::create($inputs)) {
@@ -136,6 +134,11 @@ class InternalAdController extends Controller
     public function update(InternalAdUpdateRequest $request,InternalAd $internalAd)
     {
         $inputs = $request->all();
+
+        if ($request->hasFile('url_ads')) {
+            $file = $request->file('url_ads');
+            $inputs['url_ads'] = $this->saveImage($file, 'uploads/internal_ads', 'pdf');
+        }
 
         if ($internalAd->update($inputs)) {
             return response()->json(['status' => 200]);
@@ -166,11 +169,11 @@ class InternalAdController extends Controller
         } else {
             return response()->json(['status' => 405]);
         }
-    }// Function End
+    }// Function 
 
     public function indexDoctor()
     {
-        $ads = InternalAd::get();
+        $ads = InternalAd::latest()->get();
         return view('admin.internal_ads.internal_ads_doctor.index',compact('ads'));
     }
 

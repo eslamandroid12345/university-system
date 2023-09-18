@@ -3,78 +3,63 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\Period;
-use App\Models\SubjectExam;
 use App\Models\SubjectExamStudent;
-use App\Models\SubjectExamStudentResult;
-use App\Models\SubjectStudent;
-use App\Models\SubjectUnitDoctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class SubjectExamStudentController extends Controller {
 
-
+    //new
     public function normal(Request $request){
 
         if ($request->ajax()) {
 
-            $period = Period::query()
-                ->where('status','=','start')
-                ->first();
-
-            $subject_exams = SubjectExam::query()
-                ->where('session','=','عاديه')
-                ->where('year','=',$period->year_start)
+            $subject_exam_students = SubjectExamStudent::query()
+                    ->where('session','=','عاديه')
+                    ->where('year', '=', period()->year_start)
+                    ->where('user_id', '=', Auth::id())
                 ->get();
 
-            return Datatables::of($subject_exams)
+            return Datatables::of($subject_exam_students)
 
-                ->addColumn('identifier_id', function () {
-                    return  Auth::user()->identifier_id;
+                ->addColumn('identifier_id', function ($subject_exam_students) {
+                    return  $subject_exam_students->user->identifier_id;
+                })
+                ->addColumn('exam_code', function ($subject_exam_students) {
+                    return  $subject_exam_students->subject_exam->exam_code;
                 })
                 ->addColumn('code', function ($subject_exams) {
-                    return  $subject_exams->subject->code;
-                })
-                ->addColumn('group', function ($subject_exams) {
-                    $group_name = @SubjectStudent::where(['user_id'=>$subject_exams->user_id,
-                        'subject_id'=>$subject_exams->subject_id
-                        ,'year'=>$subject_exams->year])->first()->group;
-                    return $group_name ? $group_name->group_name : '';
 
+                    return  $subject_exams->subject_exam->subject->subject_name;
                 })
 
-                ->addColumn('exam_code', function ($subject_exams) {
-
-                    $period = Period::query()
-                        ->where('status','=','start')
-                        ->first();
-
-                    return @SubjectExamStudent::query()
-                        ->where('session','=','عاديه')
-                        ->where('user_id','=',Auth::id())
-                        ->where('year','=',$period->year_start)
-                        ->where('subject_id','=',$subject_exams->subject_id)
-                        ->first()
-                        ->exam_code;
+                ->editColumn('group_id', function ($subject_exams) {
+                    return $subject_exams->subject_exam->group->group_name;
 
                 })
-                ->addColumn('section', function ($subject_exams) {
 
-                    $period = Period::query()
-                        ->where('status','=','start')
-                        ->first();
+                ->addColumn('exam_date', function ($subject_exam_students) {
 
-                    return @SubjectExamStudent::query()
-                        ->where('session','=','عاديه')
-                        ->where('year','=',$period->year_start)
-                        ->where('user_id','=',Auth::id())
-                        ->where('subject_id','=',$subject_exams->subject_id)
-                        ->first()
-                        ->section;
-
+                    return $subject_exam_students->subject_exam->exam_date;
                 })
+
+                ->addColumn('exam_day', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->exam_day;
+                })
+
+
+                ->addColumn('time_start', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->time_start;
+                })
+
+                ->addColumn('time_end', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->time_end;
+                })
+
                 ->escapeColumns([])
                 ->make(true);
         } else {
@@ -87,60 +72,53 @@ class SubjectExamStudentController extends Controller {
 
         if ($request->ajax()) {
 
-            $period = Period::query()
-                ->where('status','=','start')
-                ->first();
-
-            $subject_exams = SubjectExam::query()
+            $subject_exam_students = SubjectExamStudent::query()
                 ->where('session','=','استدراكيه')
-                ->where('year','=',$period->year_start)
+                ->where('year', '=', period()->year_start)
+                ->where('user_id', '=', Auth::id())
                 ->get();
 
-            return Datatables::of($subject_exams)
 
-                ->addColumn('identifier_id', function () {
-                    return  Auth::user()->identifier_id;
+            return Datatables::of($subject_exam_students)
+
+                ->addColumn('identifier_id', function ($subject_exam_students) {
+                    return  $subject_exam_students->user->identifier_id;
+                })
+                ->addColumn('exam_code', function ($subject_exam_students) {
+                    return  $subject_exam_students->subject_exam->exam_code;
                 })
                 ->addColumn('code', function ($subject_exams) {
-                    return  $subject_exams->subject->code;
-                })
-                ->addColumn('group', function ($subject_exams) {
-                    $group_name = @SubjectStudent::where(['user_id'=>$subject_exams->user_id,
-                        'subject_id'=>$subject_exams->subject_id
-                        ,'year'=>$subject_exams->year])->first()->group;
-                    return $group_name ? $group_name->group_name : '';
+
+                    return  $subject_exams->subject_exam->subject->subject_name;
                 })
 
-                ->addColumn('exam_code', function ($subject_exams) {
-
-                    $period = Period::query()
-                        ->where('status','=','start')
-                        ->first();
-
-                    return @SubjectExamStudent::query()
-                        ->where('session','=','استدراكيه')
-                        ->where('user_id','=',Auth::id())
-                        ->where('year','=',$period->year_start)
-                        ->where('subject_id','=',$subject_exams->subject_id)
-                        ->first()
-                        ->exam_code;
+                ->editColumn('group_id', function ($subject_exams) {
+                    return $subject_exams->subject_exam->group->group_name;
 
                 })
-                ->addColumn('section', function ($subject_exams) {
 
-                    $period = Period::query()
-                        ->where('status','=','start')
-                        ->first();
+                ->addColumn('exam_date', function ($subject_exam_students) {
 
-                    return @SubjectExamStudent::query()
-                        ->where('session','=','استدراكيه')
-                        ->where('year','=',$period->year_start)
-                        ->where('user_id','=',Auth::id())
-                        ->where('subject_id','=',$subject_exams->subject_id)
-                        ->first()
-                        ->section;
-
+                    return $subject_exam_students->subject_exam->exam_date;
                 })
+
+                ->addColumn('exam_day', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->exam_day;
+                })
+
+
+                ->addColumn('time_start', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->time_start;
+                })
+
+                ->addColumn('time_end', function ($subject_exam_students) {
+
+                    return $subject_exam_students->subject_exam->time_end;
+                })
+
+
                 ->escapeColumns([])
                 ->make(true);
         } else {

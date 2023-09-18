@@ -23,7 +23,7 @@ class SubjectUnitDoctorController extends Controller
     public function index(request $request)
     {
         if ($request->ajax()) {
-            $subject_unit_doctors = SubjectUnitDoctor::get();
+            $subject_unit_doctors = SubjectUnitDoctor::where('user_id', '=', auth()->user()->id)->get();
             return Datatables::of($subject_unit_doctors)
                 ->addColumn('action', function ($subject_unit_doctors) {
                     return '
@@ -35,7 +35,6 @@ class SubjectUnitDoctorController extends Controller
                        ';
                 })
                 ->editColumn('user_id', function ($subject_unit_doctors) {
-
                     return '<td>' . $subject_unit_doctors->doctor->first_name . ' ' . $subject_unit_doctors->doctor->last_name . '</td>';
                 })
                 ->editColumn('subject_id', function ($subject_unit_doctors) {
@@ -138,6 +137,7 @@ class SubjectUnitDoctorController extends Controller
         $data['departments'] = Department::query()
             ->select('id', 'department_name')
             ->get();
+
 
 
         return view('admin.subject_unit_doctors.parts.edit', compact('subjectUnitDoctor', 'data'));

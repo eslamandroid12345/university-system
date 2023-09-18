@@ -15,6 +15,7 @@ use App\Models\SubjectExam;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubjectExamRequest;
@@ -32,29 +33,20 @@ class SubjectExamController extends Controller
                 ->first();
 
             $subject_exams = SubjectExam::query()
-                ->where('session', '=', $period->session)
                 ->where('year', '=', $period->year_start)
                 ->get();
 
             return Datatables::of($subject_exams)
-                ->addColumn('processDegreeDetails', function ($subject_exams) {
-                    return '<span style="cursor:pointer" class="icon btn btn-info processDegreeDetails" data-bs-toggle="tooltip" title=" details " data-id="' . $subject_exams->id . '"> ' . trans('subject_exam.process_exam_details') . '  <i class="fa fa-eye"></i></span>';
-                })
-                ->addColumn('action', function ($points) {
+                ->addColumn('actions', function ($subject_exams) {
                     return '
-                            <button ' . (auth()->user()->user_type == 'employee' || auth()->user()->user_type == 'doctor' ? '' : 'hidden') . ' type="button" data-id="' . $points->id . '" class="btn btn-pill btn-info-light editBtn"><i class="fa fa-edit"></i></button>
-                            <button ' . (auth()->user()->user_type == 'employee' || auth()->user()->user_type == 'doctor' ? '' : 'hidden') . ' class="btn btn-pill btn-danger-light" data-toggle="modal" data-target="#delete_modal"
-                                    data-id="' . $points->id . '" data-title="">
-                                    <i class="fas fa-trash"></i>
-                            </button>
-                       ';
+                        <button type="button" data-id="' . $subject_exams->id . '" class="btn btn-pill btn-info-light editBtn"><i class="fa fa-edit"></i></button>
+                   ';
                 })
 
                 ->editColumn('subject_id', function ($subject_exams) {
                     return $subject_exams->subject->subject_name;
                 })
                 ->addColumn('group_id', function ($subject_exams) {
-
                     return @$subject_exams->group->group_name;
                 })
                 ->escapeColumns([])
@@ -211,7 +203,7 @@ class SubjectExamController extends Controller
         return view('admin.subject_exams.parts_remedial.edit', compact('subjectExam', 'groups', 'departments', 'subjects', 'branches'));
     }
 
-    public function update(Request $request, SubjectExam $subjectExam)
+    public function update(SubjectExamRequest $request, SubjectExam $subjectExam): JsonResponse
     {
         if ($subjectExam->update($request->all())) {
             return response()->json(['status' => 200]);
@@ -237,61 +229,33 @@ class SubjectExamController extends Controller
 //            ->where('group_id', '=', $request->group_id)
             ->pluck('subject_name', 'id');
 
+
+
     } // end of get subject
+
+
 
     public function student_exam_print()
     {
-        $period = Period::query()
-            ->where('status', '=', 'start')
-            ->first();
 
-        $subject_exams = SubjectExam::query()
-            ->where('period', '=', $period->period)
-            ->where('year', '=', $period->year_start)
+
+        $subject_exam_students = SubjectExamStudent::query()
+            ->where('period', '=', period()->period)
+            ->where('year', '=', period()->year_start)
+            ->where('user_id', '=', Auth::id())
             ->get();
 
-        $subject_ids = SubjectExam::query()
-            ->where('period', '=', $period->period)
-            ->where('year', '=', $period->year_start)
-            ->pluck('subject_id')
-            ->toArray();
 
-        $doctor = SubjectUnitDoctor::query()
-            ->where('period', '=', $period->period)
-            ->where('year', '=', $period->year_start)
-            ->whereIn('subject_id', $subject_ids)
-            ->first();
+        return view('admin.subject_exams.print', compact('subject_exam_students'));
 
-        $exam_code = SubjectExamStudent::query()
-            ->where('period', '=', $period->period)
-            ->where('user_id', '=', Auth::id())
-            ->where('year', '=', $period->year_start)
-            ->whereIn('subject_id', $subject_ids)
-            ->first();
-
-        $section = SubjectExamStudent::query()
-            ->where('period', '=', $period->period)
-            ->where('year', '=', $period->year_start)
-            ->where('user_id', '=', Auth::id())
-            ->whereIn('subject_id', $subject_ids)
-            ->first();
-
-        return view('admin.subject_exams.print', compact([
-            'period',
-            'subject_exams',
-            'doctor',
-            'exam_code',
-            'section',
-            'period'
-        ]));
-    }
+    }//end fun
 
 
 
     public function ProcessDegreeDetails($id)
     {
         $subjectExam = SubjectExam::query()
-        ->findOrFail($id);
+            ->findOrFail($id);
 
         $period = Period::query()
             ->where('status','=','start')
@@ -299,19 +263,19 @@ class SubjectExamController extends Controller
 
         $processDegrees = ProcessDegree::query()
             ->with(['user','doctor','subject'])
-        ->where('subject_id', $subjectExam->subject_id)
-        ->where('year', $period->year_start)
-        ->where('period', $period->session)
+            ->where('subject_id', $subjectExam->subject_id)
+            ->where('year', $period->year_start)
+            ->where('period', $period->session)
             ->get();
 
         return view('admin.subject_exams.details.processDegreeDetails', compact('processDegrees'));
     }
 
- public function changeRequestStatus(Request $request): JsonResponse
- {
+    public function changeRequestStatus(Request $request): JsonResponse
+    {
 
         $processDegrees = ProcessDegree::query()
-        ->where('id', $request->id)
+            ->where('id', $request->id)
             ->first();
 
         $processDegrees->update(['request_status' => $request->request_status]);
@@ -322,7 +286,4 @@ class SubjectExamController extends Controller
             return response()->json(['status' => 405]);
         }
     }
-
-
-
 }

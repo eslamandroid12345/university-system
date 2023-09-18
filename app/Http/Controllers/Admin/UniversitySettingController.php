@@ -27,12 +27,13 @@ class UniversitySettingController extends Controller
     {
 
         $inputs = $request->all();
+
         if ($logo = $request->file('logo')) {
 
             $destinationPath = 'uploads/university_setting';
-            $logoImage = date('YmdHis') . "." . $logo->getClientOriginalExtension();
+            $logoImage = "logo".date('YmdHis') . "." . $logo->getClientOriginalExtension();
             $logo->move($destinationPath, $logoImage);
-            $request['logo'] = "$logoImage";
+            $inputs['logo'] = "$logoImage";
 
             if (file_exists(public_path('uploads/university_setting/'.$universitySetting->logo))) {
                 unlink(public_path('uploads/university_setting/'.$universitySetting->logo));
@@ -43,14 +44,15 @@ class UniversitySettingController extends Controller
         if ($stamp_logo = $request->file('stamp_logo')) {
 
             $destinationPath = 'uploads/university_setting';
-            $stampLogoImage = date('YmdHis') . "." . $stamp_logo->getClientOriginalExtension();
+            $stampLogoImage = "stmp".date('YmdHis') . "." . $stamp_logo->getClientOriginalExtension();
             $stamp_logo->move($destinationPath, $stampLogoImage);
-            $request['stamp_logo'] = "$stampLogoImage";
+            $inputs['stamp_logo'] = "$stampLogoImage";
 
             if (file_exists(public_path('uploads/university_setting/'.$universitySetting->stamp_logo))) {
                 unlink(public_path('uploads/university_setting/'.$universitySetting->stamp_logo));
             }
         }
+
         if ($universitySetting->update($inputs)) {
             return response()->json(['status' => 200]);
         } else {

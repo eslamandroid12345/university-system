@@ -49,7 +49,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Edit MODAL CLOSED -->
         </div>
 
 
@@ -63,7 +62,7 @@
                     {data: 'unit_id', name: 'unit_id'},
                     {data: 'group_id', name: 'group_id'},
                     {data: 'subject_id', name: 'subject_id'},
-                    {data: 'doctor_id', name: 'doctor_id'},
+                    {data: 'doctor', name: 'doctor'},
                     {data: 'student_degree', name: 'student_degree'},
                     {data: 'exam_degree', name: 'exam_degree'},
                     {data: 'period', name: 'period'},

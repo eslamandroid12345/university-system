@@ -11,9 +11,9 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
-class UserExport implements FromCollection, WithHeadings, ShouldAutoSize
+class UserExport implements FromCollection, WithHeadings, ShouldAutoSize{
 
-{
+
     public function headings(): array
     {
         return [
@@ -38,6 +38,7 @@ class UserExport implements FromCollection, WithHeadings, ShouldAutoSize
             'university register year',
             'email',
             'user status',
+            'student type',
         ];
     }
 
@@ -76,6 +77,7 @@ class UserExport implements FromCollection, WithHeadings, ShouldAutoSize
               'university_register_year' => $user->university_register_year,
               'email' => $user->email,
               'user_status' => $user->user_status,
+              'student_type_id' => $user->student_type_id,
             ];
             $data[] = $user_data;
         }
